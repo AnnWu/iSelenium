@@ -32,7 +32,15 @@ public abstract class WebUIBase {
     public void begin() {
         //加载配置文件，注意需要事先将配置文件放到user.home下
         logger.info("加载配置文件" + propFileName);
-        Properties prop = loadFromEnvProperties(propFileName);
+        //Properties prop = loadFromEnvProperties(propFileName);
+        InputStream in = this.getClass().getResourceAsStream("/iselenium.properties");
+        Properties prop = new Properties();
+        //InputStreamReader inputStreamReader = null;
+        try {
+            prop.load(in);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         //获取浏览器driver路径
         logger.info("读入各个webdriver的路径");
